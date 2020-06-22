@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+</head>
+<body>
+    {{>header}}
+    <h1>{{title}}</h1>
+    <form>
+        <input placeholder="Enter Location"></input>
+        <button>Submit</button>
+    </form>
+    <p id="p1s"></p>
+    <p id="p2s"></p>
+          {{>footer}}
+    <script>
+    console.log('Hiiiii')
+    const weatherForm = document.querySelector('form')
+    const loca = document.querySelector('input')
+    const p1 = document.querySelector('#p1s')
+    const p2 = document.querySelector('#p2s')
+    weatherForm.addEventListener('submit', (e) => {
+    p1.textContent = 'Loading'
+    p2.textContent = ''
+        e.preventDefault()
+        fetch('http://localhost:3000/weather?address=' + loca.value).then((response) => {
+            if(response.error){
+                console.log('no net')
+                console.log(typeof(response.error))
+                p1.textContent = response.error
+            }
+            else{
+            response.json().then((data) => {
+                if(data.error){
+                    console.log(typeof(data.error))
+                    console.log('nets')
+                    p1.textContent = data.error
+                }
+                else {
+                    p1.textContent = data.location
+                    p2.textContent = data.forecast
+                    console.log(data.location)
+                    console.log(data.forecast)
+                }
+            })
+            }
+        })
+    })
+    
+</script>
+</body>
+
+</html>
