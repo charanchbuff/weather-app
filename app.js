@@ -2,6 +2,7 @@ const express = require('express')
 const path = require('path')
 const hbs = require('hbs')
 const app = express()
+const port = process.env.PORT || 3000
 const geocode = require('./geocode')
 const forecast = require('./forecast')
 const request = require('request')
@@ -59,6 +60,6 @@ app.get('*',(req,res) => {
     res.render('error', {message : 'Page Not Found'})
 })
 
-app.listen(3000,() => {
+app.listen(port,() => {
     console.log('Server up')
 })

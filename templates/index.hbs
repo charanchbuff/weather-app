@@ -23,7 +23,7 @@
     p1.textContent = 'Loading'
     p2.textContent = ''
         e.preventDefault()
-        fetch('http://localhost:3000/weather?address=' + loca.value).then((response) => {
+        fetch('/weather?address=' + loca.value).then((response) => {
             if(response.error){
                 console.log('no net')
                 console.log(typeof(response.error))
